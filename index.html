@@ -446,6 +446,95 @@
       line-height: 1.5;
     }
 
+    /* ── PSYCHO SPLIT ── */
+    .psycho-split {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      margin-bottom: 28px;
+      align-items: start;
+    }
+
+    .psycho-sub {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+    }
+
+    .psycho-sub-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--purple);
+      margin-bottom: 14px;
+    }
+
+    .psycho-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .psycho-list li {
+      font-size: 0.83rem;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .psycho-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--text3);
+    }
+
+    .psycho-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 16px 0;
+      gap: 6px;
+    }
+
+    .psycho-connector-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, transparent, var(--purple), transparent);
+    }
+
+    .psycho-connector-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(34,211,238,0.08);
+      border: 1px solid rgba(34,211,238,0.2);
+      border-radius: 4px;
+      padding: 4px 8px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 700px) {
+      .psycho-split {
+        grid-template-columns: 1fr;
+      }
+      .psycho-connector {
+        flex-direction: row;
+        padding: 12px 0;
+      }
+      .psycho-connector-line {
+        width: 40px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--purple), transparent);
+      }
+    }
+
     details.product-more { margin-top: 4px; }
 
     details.product-more summary {
@@ -747,27 +836,38 @@
       <div class="product-badge">In development · 2026</div>
       <div class="product-title">PsychoAI</div>
       <p class="product-tagline">
-        Two products – one platform. An AI exoskeleton for gestalt therapists,
-        and a personal companion app for their clients.
-        Like ADAS for a car – it amplifies the therapist's perception,
-        making visible what used to be invisible: patterns, dynamics, blind spots.
+        A neural network of psychology – one unified platform, two connected products.
+        Client data flows to the therapist's side: diary entries, session history, emotional dynamics.
+        The therapist sees the full picture. The client gets better support.
       </p>
 
-      <div class="product-pillars">
-        <div class="pillar">
-          <div class="pillar-icon">🦾</div>
-          <div class="pillar-title">Exoskeleton for therapists</div>
-          <div class="pillar-desc">Transcribes sessions, maintains client cards, tracks dynamics, suggests interventions based on the collective experience of thousands of sessions.</div>
+      <div class="psycho-split">
+        <div class="psycho-sub">
+          <div class="psycho-sub-label">PsychoAI for Clients</div>
+          <ul class="psycho-list">
+            <li>Reflective diary – voice or text, daily</li>
+            <li>AI neuro-therapist – from quick check-ins to full sessions</li>
+            <li>Exercises, metaphorical cards, emotional tracking</li>
+            <li>Weekly reports with patterns and dynamics</li>
+            <li>Share diary and reports with your real therapist</li>
+          </ul>
         </div>
-        <div class="pillar">
-          <div class="pillar-icon">📓</div>
-          <div class="pillar-title">Companion app for clients</div>
-          <div class="pillar-desc">Daily reflective diary, AI sessions, metaphorical cards, weekly reports. Connects to the client's real therapist – who sees a briefing before each session.</div>
+
+        <div class="psycho-connector">
+          <div class="psycho-connector-line"></div>
+          <div class="psycho-connector-badge">data shared</div>
+          <div class="psycho-connector-line"></div>
         </div>
-        <div class="pillar">
-          <div class="pillar-icon">🧠</div>
-          <div class="pillar-title">Collective intelligence</div>
-          <div class="pillar-desc">A neural network trained on real session outcomes. Gets smarter with every interaction – a junior therapist gets the experience of thousands of sessions.</div>
+
+        <div class="psycho-sub">
+          <div class="psycho-sub-label">PsychoAI for Therapists</div>
+          <ul class="psycho-list">
+            <li>Session transcription – auto-detects gestalt mechanisms</li>
+            <li>Client card with long-term trend analysis</li>
+            <li>Pre-session briefing – what happened since last time</li>
+            <li>Pattern alerts – surfaces what's hard to notice manually</li>
+            <li>Sees client's diary (if shared) – full context before a session</li>
+          </ul>
         </div>
       </div>
 
@@ -778,34 +878,29 @@
         </summary>
         <div class="product-more-content">
           <div class="more-block">
-            <div class="more-block-title">Exoskeleton – therapist tools</div>
+            <div class="more-block-title">Client app – full feature set</div>
             <ul>
-              <li>Session transcription with gestalt mechanism detection (projection, retroflection, introjection)</li>
-              <li>Client card – therapist notes by voice or text, auto-structured into an epicrisis</li>
-              <li>Pre-session briefing – what happened with the client since last time</li>
-              <li>Intervention suggestions based on collective outcomes – what worked in similar cases</li>
-              <li>Client dynamics over time – topics, emotional patterns, progress</li>
-              <li>Therapist marketplace – AI matches clients to practitioners by style and specialisation</li>
-            </ul>
-          </div>
-          <div class="more-block">
-            <div class="more-block-title">Client companion app</div>
-            <ul>
-              <li>Daily diary – voice or text, 5 minutes an evening</li>
-              <li>AI sessions – from 10-minute check-ins to full 50-minute conversations</li>
-              <li>Choose a therapist persona: Perls, Rogers, Yalom or real practitioners</li>
+              <li>AI sessions – choose a therapist persona: Perls, Rogers, Yalom or real practitioners</li>
               <li>Metaphorical card work – AI-guided reflection around a generated image</li>
-              <li>Weekly & monthly reports with patterns and dynamics</li>
-              <li>Share reports with a real therapist before a session</li>
+              <li>Monthly reports with dynamics, topics, emotional timeline</li>
+              <li>Therapist marketplace – AI matches you to a practitioner by style and fit</li>
             </ul>
           </div>
           <div class="more-block">
-            <div class="more-block-title">Privacy & architecture</div>
+            <div class="more-block-title">Therapist app – full feature set</div>
             <ul>
+              <li>Intervention suggestions – what worked in similar cases across thousands of sessions</li>
+              <li>Client dynamics over time – topics shifting, emotional patterns, progress markers</li>
+              <li>Therapist notes by voice or text – auto-structured into a client epicrisis</li>
+              <li>Collective intelligence – a junior therapist gets the accumulated experience of the field</li>
+            </ul>
+          </div>
+          <div class="more-block">
+            <div class="more-block-title">Privacy</div>
+            <ul>
+              <li>Client controls what gets shared and with whom</li>
               <li>Anonymisation before sending to cloud LLMs</li>
-              <li>Client controls exactly what gets shared and with whom</li>
               <li>Roadmap to fully local models – zero data leakage</li>
-              <li>Therapist personas via LoRA adapters on base models</li>
             </ul>
           </div>
         </div>
