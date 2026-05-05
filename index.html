@@ -1359,6 +1359,7 @@
     entries.forEach(e => {
       if (e.isIntersecting) {
         dots.forEach(d => d.classList.toggle('active', d.dataset.target === e.target.id));
+        history.replaceState(null, '', '#' + e.target.id);
       }
     });
   }, { threshold: 0.4 });
