@@ -48,6 +48,7 @@
       display: flex;
       align-items: center;
       padding: 80px 24px;
+      position: relative;
     }
 
     .hero-inner {
@@ -424,6 +425,42 @@
       50% { opacity: 0; }
     }
 
+    /* ── SCROLL HINT ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+      cursor: pointer;
+    }
+
+    .scroll-hint span {
+      font-size: 0.68rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--purple);
+      border-bottom: 2px solid var(--purple);
+      transform: rotate(45deg);
+      animation: bounce 1.6s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+      50% { transform: rotate(45deg) translateY(5px); opacity: 1; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       .hero-inner {
@@ -466,6 +503,10 @@
     <div class="hero-photo-wrap">
       <img class="hero-photo" src="assets/photo.jpg" alt="Alexander Kirilov" />
     </div>
+  </div>
+  <div class="scroll-hint" onclick="document.querySelector('.story').scrollIntoView({behavior:'smooth'})">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
   </div>
 </section>
 
