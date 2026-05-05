@@ -29,6 +29,34 @@
       overflow-x: hidden;
     }
 
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(14,14,28,0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      cursor: pointer;
+    }
+
+    .lang-opt {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text3);
+      transition: color 0.15s;
+    }
+
+    .lang-opt.active { color: var(--purple); }
+    .lang-sep { color: var(--border); font-size: 0.75rem; }
+
     /* ── CANVAS BACKGROUND ── */
     #canvas {
       position: fixed;
@@ -722,11 +750,17 @@
 
 <canvas id="canvas"></canvas>
 
+<div class="lang-toggle" id="langToggle">
+  <span class="lang-opt active" id="opt-en">EN</span>
+  <span class="lang-sep">·</span>
+  <span class="lang-opt" id="opt-ru">RU</span>
+</div>
+
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-label">AI Engineer · Available for projects</div>
+      <div class="hero-label" data-i18n="hero-label">AI Engineer · Available for projects</div>
       <h1 class="hero-name">Alexander<br><span>Kirilov</span></h1>
       <p class="hero-tagline" id="tagline"></p>
       <div class="hero-cta">
@@ -749,7 +783,7 @@
     </div>
   </div>
   <div class="scroll-hint" onclick="document.querySelector('.story').scrollIntoView({behavior:'smooth'})">
-    <span>scroll</span>
+    <span data-i18n="scroll-text">scroll</span>
     <div class="scroll-arrow"></div>
   </div>
 </section>
@@ -757,39 +791,39 @@
 <!-- ── STORY ── -->
 <section class="story">
   <div class="story-inner">
-    <div class="section-tag reveal">Background</div>
-    <h2 class="section-title reveal">From high-load systems<br>to AI engineering</h2>
+    <div class="section-tag reveal" data-i18n="story-tag">Background</div>
+    <h2 class="section-title reveal" data-i18n="story-title">From high-load systems<br>to AI engineering</h2>
     <div class="timeline">
       <div class="tl-item reveal">
         <div class="tl-year">2006</div>
         <div class="tl-line"></div>
         <div class="tl-content">
-          <div class="tl-title">Foundation in engineering</div>
-          <div class="tl-text">Started as a Java developer, built products across fintech, e-commerce, and logistics. Learned early that software only matters when it runs reliably at scale.</div>
+          <div class="tl-title" data-i18n="tl-2006-title">Foundation in engineering</div>
+          <div class="tl-text" data-i18n="tl-2006-text">Started as a Java developer, built products across fintech, e-commerce, and logistics. Learned early that software only matters when it runs reliably at scale.</div>
         </div>
       </div>
       <div class="tl-item reveal">
         <div class="tl-year">2012</div>
         <div class="tl-line"></div>
         <div class="tl-content">
-          <div class="tl-title">Odnoklassniki – real scale</div>
-          <div class="tl-text">Joined one of the world's largest social networks: 140M users, 350K req/sec. Designed targeting and notification systems. Learned what production-grade really means.</div>
+          <div class="tl-title" data-i18n="tl-2012-title">Odnoklassniki – real scale</div>
+          <div class="tl-text" data-i18n="tl-2012-text">Joined one of the world's largest social networks: 140M users, 350K req/sec. Designed targeting and notification systems. Learned what production-grade really means.</div>
         </div>
       </div>
       <div class="tl-item reveal">
         <div class="tl-year">2016</div>
         <div class="tl-line"></div>
         <div class="tl-content">
-          <div class="tl-title">AI/ML at Wargaming's InData Labs</div>
-          <div class="tl-text">Led backend teams on ML-powered products. Integrated ML modules into high-load production services. First deep contact with AI systems in production – not theory, but real revenue impact.</div>
+          <div class="tl-title" data-i18n="tl-2016-title">AI/ML at Wargaming's InData Labs</div>
+          <div class="tl-text" data-i18n="tl-2016-text">Led backend teams on ML-powered products. Integrated ML modules into high-load production services. First deep contact with AI systems in production – not theory, but real revenue impact.</div>
         </div>
       </div>
       <div class="tl-item reveal">
         <div class="tl-year">2024</div>
         <div class="tl-line"></div>
         <div class="tl-content">
-          <div class="tl-title">AI Engineer – full focus</div>
-          <div class="tl-text">LLMs, RAG pipelines, agentic systems. Building PsychoAI – an AI platform for the mental health space. 20 years of production experience now applied to what's next.</div>
+          <div class="tl-title" data-i18n="tl-2024-title">AI Engineer – full focus</div>
+          <div class="tl-text" data-i18n="tl-2024-text">LLMs, RAG pipelines, agentic systems. Building PsychoAI – an AI platform for the mental health space. 20 years of production experience now applied to what's next.</div>
         </div>
       </div>
     </div>
@@ -799,28 +833,28 @@
 <!-- ── SERVICES ── -->
 <section class="services">
   <div class="services-inner">
-    <div class="section-tag reveal">What I do</div>
-    <h2 class="section-title reveal">I build AI that ships</h2>
+    <div class="section-tag reveal" data-i18n="services-tag">What I do</div>
+    <h2 class="section-title reveal" data-i18n="services-title">I build AI that ships</h2>
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="service-icon">🧠</div>
-        <div class="service-title">AI Integration</div>
-        <div class="service-desc">I connect LLMs, RAG pipelines, and agentic systems to your existing business processes – so the result is working software, not a proof of concept.</div>
+        <div class="service-title" data-i18n="svc1-title">AI Integration</div>
+        <div class="service-desc" data-i18n="svc1-desc">I connect LLMs, RAG pipelines, and agentic systems to your existing business processes – so the result is working software, not a proof of concept.</div>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">🏗️</div>
-        <div class="service-title">Architecture to Production</div>
-        <div class="service-desc">From system design to deployed Docker container – I own the full delivery. Monitoring, caching, error handling, CI/CD. Ready to hand over, not to babysit.</div>
+        <div class="service-title" data-i18n="svc2-title">Architecture to Production</div>
+        <div class="service-desc" data-i18n="svc2-desc">From system design to deployed Docker container – I own the full delivery. Monitoring, caching, error handling, CI/CD. Ready to hand over, not to babysit.</div>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">💬</div>
-        <div class="service-title">Business Communication</div>
-        <div class="service-desc">I speak both languages – technical and business. I clarify what's unstated, surface what's missing, and build what actually solves the problem – not just what was asked.</div>
+        <div class="service-title" data-i18n="svc3-title">Business Communication</div>
+        <div class="service-desc" data-i18n="svc3-desc">I speak both languages – technical and business. I clarify what's unstated, surface what's missing, and build what actually solves the problem – not just what was asked.</div>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">👥</div>
-        <div class="service-title">Team & Process</div>
-        <div class="service-desc">20 years of leading engineering teams. I set up Scrum, own estimations and risk, and can step in as a tech lead or hands-on developer – whatever the project needs.</div>
+        <div class="service-title" data-i18n="svc4-title">Team & Process</div>
+        <div class="service-desc" data-i18n="svc4-desc">20 years of leading engineering teams. I set up Scrum, own estimations and risk, and can step in as a tech lead or hands-on developer – whatever the project needs.</div>
       </div>
     </div>
   </div>
@@ -829,13 +863,13 @@
 <!-- ── BUILDING ── -->
 <section class="building">
   <div class="building-inner">
-    <div class="section-tag reveal">What I'm building</div>
-    <h2 class="section-title reveal">Products in development</h2>
+    <div class="section-tag reveal" data-i18n="building-tag">What I'm building</div>
+    <h2 class="section-title reveal" data-i18n="building-title">Products in development</h2>
 
     <div class="product-card reveal">
-      <div class="product-badge">In development · 2026</div>
+      <div class="product-badge" data-i18n="product-badge">In development · 2026</div>
       <div class="product-title">PsychoAI</div>
-      <p class="product-tagline">
+      <p class="product-tagline" data-i18n="product-tagline">
         A neural network of psychology – one unified platform, two connected products.
         Client data flows to the therapist's side: diary entries, session history, emotional dynamics.
         The therapist sees the full picture. The client gets better support.
@@ -843,30 +877,30 @@
 
       <div class="psycho-split">
         <div class="psycho-sub">
-          <div class="psycho-sub-label">PsychoAI for Clients</div>
+          <div class="psycho-sub-label" data-i18n="clients-label">PsychoAI for Clients</div>
           <ul class="psycho-list">
-            <li>Reflective diary – voice or text, daily</li>
-            <li>AI neuro-therapist – from quick check-ins to full sessions</li>
-            <li>Exercises, metaphorical cards, emotional tracking</li>
-            <li>Weekly reports with patterns and dynamics</li>
-            <li>Share diary and reports with your real therapist</li>
+            <li data-i18n="clients-li1">Reflective diary – voice or text, daily</li>
+            <li data-i18n="clients-li2">AI neuro-therapist – from quick check-ins to full sessions</li>
+            <li data-i18n="clients-li3">Exercises, metaphorical cards, emotional tracking</li>
+            <li data-i18n="clients-li4">Weekly reports with patterns and dynamics</li>
+            <li data-i18n="clients-li5">Share diary and reports with your real therapist</li>
           </ul>
         </div>
 
         <div class="psycho-connector">
           <div class="psycho-connector-line"></div>
-          <div class="psycho-connector-badge">data shared</div>
+          <div class="psycho-connector-badge" data-i18n="connector-badge">data shared</div>
           <div class="psycho-connector-line"></div>
         </div>
 
         <div class="psycho-sub">
-          <div class="psycho-sub-label">PsychoAI for Therapists</div>
+          <div class="psycho-sub-label" data-i18n="therapists-label">PsychoAI for Therapists</div>
           <ul class="psycho-list">
-            <li>Session transcription – auto-detects gestalt mechanisms</li>
-            <li>Client card with long-term trend analysis</li>
-            <li>Pre-session briefing – what happened since last time</li>
-            <li>Pattern alerts – surfaces what's hard to notice manually</li>
-            <li>Sees client's diary (if shared) – full context before a session</li>
+            <li data-i18n="therapists-li1">Session transcription – auto-detects gestalt mechanisms</li>
+            <li data-i18n="therapists-li2">Client card with long-term trend analysis</li>
+            <li data-i18n="therapists-li3">Pre-session briefing – what happened since last time</li>
+            <li data-i18n="therapists-li4">Pattern alerts – surfaces what's hard to notice manually</li>
+            <li data-i18n="therapists-li5">Sees client's diary (if shared) – full context before a session</li>
           </ul>
         </div>
       </div>
@@ -874,33 +908,33 @@
       <details class="product-more">
         <summary>
           <span class="summary-arrow">▶</span>
-          Read more about the system
+          <span data-i18n="more-summary">Read more about the system</span>
         </summary>
         <div class="product-more-content">
           <div class="more-block">
-            <div class="more-block-title">Client app – full feature set</div>
+            <div class="more-block-title" data-i18n="more1-title">Client app – full feature set</div>
             <ul>
-              <li>AI sessions – choose a therapist persona: Perls, Rogers, Yalom or real practitioners</li>
-              <li>Metaphorical card work – AI-guided reflection around a generated image</li>
-              <li>Monthly reports with dynamics, topics, emotional timeline</li>
-              <li>Therapist marketplace – AI matches you to a practitioner by style and fit</li>
+              <li data-i18n="more1-li1">AI sessions – choose a therapist persona: Perls, Rogers, Yalom or real practitioners</li>
+              <li data-i18n="more1-li2">Metaphorical card work – AI-guided reflection around a generated image</li>
+              <li data-i18n="more1-li3">Monthly reports with dynamics, topics, emotional timeline</li>
+              <li data-i18n="more1-li4">Therapist marketplace – AI matches you to a practitioner by style and fit</li>
             </ul>
           </div>
           <div class="more-block">
-            <div class="more-block-title">Therapist app – full feature set</div>
+            <div class="more-block-title" data-i18n="more2-title">Therapist app – full feature set</div>
             <ul>
-              <li>Intervention suggestions – what worked in similar cases across thousands of sessions</li>
-              <li>Client dynamics over time – topics shifting, emotional patterns, progress markers</li>
-              <li>Therapist notes by voice or text – auto-structured into a client epicrisis</li>
-              <li>Collective intelligence – a junior therapist gets the accumulated experience of the field</li>
+              <li data-i18n="more2-li1">Intervention suggestions – what worked in similar cases across thousands of sessions</li>
+              <li data-i18n="more2-li2">Client dynamics over time – topics shifting, emotional patterns, progress markers</li>
+              <li data-i18n="more2-li3">Therapist notes by voice or text – auto-structured into a client epicrisis</li>
+              <li data-i18n="more2-li4">Collective intelligence – a junior therapist gets the accumulated experience of the field</li>
             </ul>
           </div>
           <div class="more-block">
-            <div class="more-block-title">Privacy</div>
+            <div class="more-block-title" data-i18n="more3-title">Privacy</div>
             <ul>
-              <li>Client controls what gets shared and with whom</li>
-              <li>Anonymisation before sending to cloud LLMs</li>
-              <li>Roadmap to fully local models – zero data leakage</li>
+              <li data-i18n="more3-li1">Client controls what gets shared and with whom</li>
+              <li data-i18n="more3-li2">Anonymisation before sending to cloud LLMs</li>
+              <li data-i18n="more3-li3">Roadmap to fully local models – zero data leakage</li>
             </ul>
           </div>
         </div>
@@ -912,24 +946,24 @@
 <!-- ── PROJECTS ── -->
 <section class="projects">
   <div class="projects-inner">
-    <div class="section-tag reveal">Selected Work</div>
-    <h2 class="section-title reveal">AI systems built & shipped</h2>
+    <div class="section-tag reveal" data-i18n="projects-tag">Selected Work</div>
+    <h2 class="section-title reveal" data-i18n="projects-title">AI systems built & shipped</h2>
     <div class="projects-grid">
       <a class="project-card reveal" href="https://github.com/akipushdev/psychoai-rag-assistant" target="_blank" rel="noopener">
         <div class="project-name">psychoai-rag-assistant</div>
-        <div class="project-desc">Production RAG assistant for gestalt therapy. Faithfulness=1.0 evaluated with RAGAS. Python, Qdrant, Redis, Gemini Flash.</div>
+        <div class="project-desc" data-i18n="proj1-desc">Production RAG assistant for gestalt therapy. Faithfulness=1.0 evaluated with RAGAS. Python, Qdrant, Redis, Gemini Flash.</div>
       </a>
       <a class="project-card reveal" href="https://github.com/akipushdev/generic-rag-agent" target="_blank" rel="noopener">
         <div class="project-name">generic-rag-agent</div>
-        <div class="project-desc">Universal RAG platform – upload any documents, get a ready AI assistant. Python, FastAPI, Qdrant, Docker.</div>
+        <div class="project-desc" data-i18n="proj2-desc">Universal RAG platform – upload any documents, get a ready AI assistant. Python, FastAPI, Qdrant, Docker.</div>
       </a>
       <a class="project-card reveal" href="https://github.com/akipushdev/multimodal-telegram-bot" target="_blank" rel="noopener">
         <div class="project-name">multimodal-telegram-bot</div>
-        <div class="project-desc">Telegram bot with session lifecycle – text, voice (Whisper STT) and photo (Gemini Vision) in one conversation.</div>
+        <div class="project-desc" data-i18n="proj3-desc">Telegram bot with session lifecycle – text, voice (Whisper STT) and photo (Gemini Vision) in one conversation.</div>
       </a>
       <a class="project-card reveal" href="https://github.com/akipushdev/ai-personal-assistant" target="_blank" rel="noopener">
         <div class="project-name">ai-personal-assistant</div>
-        <div class="project-desc">Universal AI assistant – text, voice (Whisper + TTS), vision, image generation (DALL-E 3), RAG over your own documents.</div>
+        <div class="project-desc" data-i18n="proj4-desc">Universal AI assistant – text, voice (Whisper + TTS), vision, image generation (DALL-E 3), RAG over your own documents.</div>
       </a>
     </div>
   </div>
@@ -938,24 +972,24 @@
 <!-- ── CTA ── -->
 <section class="cta-section">
   <div class="cta-inner">
-    <div class="section-tag reveal" style="text-align:center">Contact</div>
-    <h2 class="cta-title reveal">Let's build something real</h2>
-    <p class="cta-sub reveal">
+    <div class="section-tag reveal" style="text-align:center" data-i18n="cta-tag">Contact</div>
+    <h2 class="cta-title reveal" data-i18n="cta-title">Let's build something real</h2>
+    <p class="cta-sub reveal" data-i18n="cta-sub">
       If you have an AI project in mind – or aren't sure yet what's possible –
       reach out. I'll come back with a clear picture of what can be built and how.
     </p>
     <div class="cta-buttons reveal">
       <a class="btn btn-primary" href="https://t.me/goldpirate24" target="_blank" rel="noopener">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
-        Write on Telegram
+        <span data-i18n="btn-tg">Write on Telegram</span>
       </a>
-      <a class="btn btn-secondary" href="https://www.linkedin.com/in/kirilovu/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      <a class="btn btn-secondary" href="https://www.linkedin.com/in/kirilovu/" target="_blank" rel="noopener" data-i18n="btn-li">Connect on LinkedIn</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <span>Alexander Kirilov · AI Engineer · aipush.dev</span>
+  <span data-i18n="footer-text">Alexander Kirilov · AI Engineer · aipush.dev</span>
 </footer>
 
 <script>
@@ -1021,8 +1055,10 @@
   draw();
   window.addEventListener('resize', () => { resize(); initNodes(); });
 
-  /* ── TYPING EFFECT ── */
-  const phrases = [
+  /* ── LANG SWITCH ── */
+  let currentLang = 'en';
+
+  const phrasesEn = [
     'I build AI that ships to production.',
     'RAG pipelines · LLMs · Agentic systems.',
     '20 years of engineering. Now focused on AI.',
@@ -1039,16 +1075,197 @@
     'High-load systems. Clinical data. AI platforms.',
     'Java · Python · Kafka · Kubernetes · AWS · GCP.'
   ];
+
+  const phrasesRu = [
+    'Строю AI, который работает в продакшне.',
+    'RAG-пайплайны · LLM · Агентные системы.',
+    '20 лет инженерии. Сейчас – AI.',
+    'От 140М пользователей до продакшн-AI.',
+    'Я не делаю демо. Я делаю системы.',
+    'Читаю между строк – строю то, что нужно на самом деле.',
+    'Проактивен по умолчанию. Молчать не умею.',
+    '350К req/sec – вот что такое настоящий продакшн.',
+    'Закрываю пробелы раньше, чем вы их заметите.',
+    'Тимлид · Архитектор · Hands-on разработчик.',
+    'Одноклассники · Wargaming · REDCap Cloud.',
+    'Если не выдержит продакшн – не считается.',
+    'Ваш AI-проект – оценён, построен, сдан.',
+    'Высоконагруженные системы. Клиника. AI-платформы.',
+    'Java · Python · Kafka · Kubernetes · AWS · GCP.'
+  ];
+
+  const T = {
+    en: {
+      'hero-label': 'AI Engineer · Available for projects',
+      'scroll-text': 'scroll',
+      'story-tag': 'Background',
+      'story-title': 'From high-load systems<br>to AI engineering',
+      'tl-2006-title': 'Foundation in engineering',
+      'tl-2006-text': 'Started as a developer, built products across fintech, e-commerce, and logistics. Learned early that software only matters when it runs reliably at scale.',
+      'tl-2012-title': 'Odnoklassniki – real scale',
+      'tl-2012-text': 'Joined one of the world\'s largest social networks: 140M users, 350K req/sec. Designed targeting and notification systems. Learned what production-grade really means.',
+      'tl-2016-title': 'AI/ML at Wargaming\'s InData Labs',
+      'tl-2016-text': 'Led backend teams on ML-powered products. Integrated ML modules into high-load production services. First deep contact with AI systems in production – not theory, but real revenue impact.',
+      'tl-2024-title': 'AI Engineer – full focus',
+      'tl-2024-text': 'LLMs, RAG pipelines, agentic systems. Building PsychoAI – an AI platform for the mental health space. 20 years of production experience now applied to what\'s next.',
+      'services-tag': 'What I do',
+      'services-title': 'I build AI that ships',
+      'svc1-title': 'AI Integration',
+      'svc1-desc': 'I connect LLMs, RAG pipelines, and agentic systems to your existing business processes – so the result is working software, not a proof of concept.',
+      'svc2-title': 'Architecture to Production',
+      'svc2-desc': 'From system design to deployed Docker container – I own the full delivery. Monitoring, caching, error handling, CI/CD. Ready to hand over, not to babysit.',
+      'svc3-title': 'Business Communication',
+      'svc3-desc': 'I speak both languages – technical and business. I clarify what\'s unstated, surface what\'s missing, and build what actually solves the problem – not just what was asked.',
+      'svc4-title': 'Team & Process',
+      'svc4-desc': '20 years of leading engineering teams. I set up Scrum, own estimations and risk, and can step in as a tech lead or hands-on developer – whatever the project needs.',
+      'building-tag': 'What I\'m building',
+      'building-title': 'Products in development',
+      'product-badge': 'In development · 2026',
+      'product-tagline': 'A neural network of psychology – one unified platform, two connected products. Client data flows to the therapist\'s side: diary entries, session history, emotional dynamics. The therapist sees the full picture. The client gets better support.',
+      'clients-label': 'PsychoAI for Clients',
+      'clients-li1': 'Reflective diary – voice or text, daily',
+      'clients-li2': 'AI neuro-therapist – from quick check-ins to full sessions',
+      'clients-li3': 'Exercises, metaphorical cards, emotional tracking',
+      'clients-li4': 'Weekly reports with patterns and dynamics',
+      'clients-li5': 'Share diary and reports with your real therapist',
+      'connector-badge': 'data shared',
+      'therapists-label': 'PsychoAI for Therapists',
+      'therapists-li1': 'Session transcription – auto-detects gestalt mechanisms',
+      'therapists-li2': 'Client card with long-term trend analysis',
+      'therapists-li3': 'Pre-session briefing – what happened since last time',
+      'therapists-li4': 'Pattern alerts – surfaces what\'s hard to notice manually',
+      'therapists-li5': 'Sees client\'s diary (if shared) – full context before a session',
+      'more-summary': 'Read more about the system',
+      'more1-title': 'Client app – full feature set',
+      'more1-li1': 'AI sessions – choose a therapist persona: Perls, Rogers, Yalom or real practitioners',
+      'more1-li2': 'Metaphorical card work – AI-guided reflection around a generated image',
+      'more1-li3': 'Monthly reports with dynamics, topics, emotional timeline',
+      'more1-li4': 'Therapist marketplace – AI matches you to a practitioner by style and fit',
+      'more2-title': 'Therapist app – full feature set',
+      'more2-li1': 'Intervention suggestions – what worked in similar cases across thousands of sessions',
+      'more2-li2': 'Client dynamics over time – topics shifting, emotional patterns, progress markers',
+      'more2-li3': 'Therapist notes by voice or text – auto-structured into a client epicrisis',
+      'more2-li4': 'Collective intelligence – a junior therapist gets the accumulated experience of the field',
+      'more3-title': 'Privacy',
+      'more3-li1': 'Client controls what gets shared and with whom',
+      'more3-li2': 'Anonymisation before sending to cloud LLMs',
+      'more3-li3': 'Roadmap to fully local models – zero data leakage',
+      'projects-tag': 'Selected Work',
+      'projects-title': 'AI systems built & shipped',
+      'proj1-desc': 'Production RAG assistant for gestalt therapy. Faithfulness=1.0 evaluated with RAGAS. Python, Qdrant, Redis, Gemini Flash.',
+      'proj2-desc': 'Universal RAG platform – upload any documents, get a ready AI assistant. Python, FastAPI, Qdrant, Docker.',
+      'proj3-desc': 'Telegram bot with session lifecycle – text, voice (Whisper STT) and photo (Gemini Vision) in one conversation.',
+      'proj4-desc': 'Universal AI assistant – text, voice (Whisper + TTS), vision, image generation (DALL-E 3), RAG over your own documents.',
+      'cta-tag': 'Contact',
+      'cta-title': 'Let\'s build something real',
+      'cta-sub': 'If you have an AI project in mind – or aren\'t sure yet what\'s possible – reach out. I\'ll come back with a clear picture of what can be built and how.',
+      'btn-tg': 'Write on Telegram',
+      'btn-li': 'Connect on LinkedIn',
+      'footer-text': 'Alexander Kirilov · AI Engineer · aipush.dev',
+    },
+    ru: {
+      'hero-label': 'AI Engineer · Открыт к проектам',
+      'scroll-text': 'листай',
+      'story-tag': 'Опыт',
+      'story-title': 'От высоконагруженных систем<br>к AI-инженерии',
+      'tl-2006-title': 'Фундамент в инженерии',
+      'tl-2006-text': 'Начинал разработчиком, строил продукты в fintech, e-commerce и логистике. Рано понял: software имеет смысл только когда работает надёжно при реальной нагрузке.',
+      'tl-2012-title': 'Одноклассники – настоящий масштаб',
+      'tl-2012-text': 'Одна из крупнейших соцсетей в мире: 140М пользователей, 350К req/sec. Проектировал системы таргетинга и нотификаций. Понял что такое продакшн-качество.',
+      'tl-2016-title': 'AI/ML в InData Labs (Wargaming)',
+      'tl-2016-text': 'Руководил backend-командами на ML-продуктах. Интегрировал ML-модули в высоконагруженные продакшн-сервисы. Первый глубокий контакт с AI-системами в продакшне – не теория, а реальный revenue impact.',
+      'tl-2024-title': 'AI Engineer – полный фокус',
+      'tl-2024-text': 'LLM, RAG-пайплайны, агентные системы. Строю PsychoAI – AI-платформу для ментального здоровья. 20 лет продакшн-опыта – теперь в применении к тому, что будет дальше.',
+      'services-tag': 'Что я делаю',
+      'services-title': 'Строю AI, который работает',
+      'svc1-title': 'AI-интеграция',
+      'svc1-desc': 'Подключаю LLM, RAG-пайплайны и агентные системы к вашим бизнес-процессам – чтобы результатом был рабочий продукт, а не proof of concept.',
+      'svc2-title': 'От архитектуры до продакшна',
+      'svc2-desc': 'От проектирования системы до задеплоенного Docker-контейнера – владею полным delivery. Мониторинг, кэширование, обработка ошибок, CI/CD. Готово к передаче, не к сопровождению.',
+      'svc3-title': 'Работа с бизнесом',
+      'svc3-desc': 'Говорю на обоих языках – техническом и бизнесовом. Уточняю невысказанное, нахожу пропущенное и строю то, что реально решает задачу – а не только то, что было сказано.',
+      'svc4-title': 'Команда и процессы',
+      'svc4-desc': '20 лет руководства инженерными командами. Выстраиваю Scrum, владею оценками и рисками, вхожу как тимлид или hands-on разработчик – в зависимости от потребностей проекта.',
+      'building-tag': 'Что я строю',
+      'building-title': 'Продукты в разработке',
+      'product-badge': 'В разработке · 2026',
+      'product-tagline': 'Нейросеть психологии – единая платформа, два связанных продукта. Данные клиента передаются терапевту: записи дневника, история сессий, эмоциональная динамика. Терапевт видит полную картину. Клиент получает лучшую поддержку.',
+      'clients-label': 'PsychoAI для клиентов',
+      'clients-li1': 'Рефлексивный дневник – голосом или текстом, каждый день',
+      'clients-li2': 'AI нейро-терапевт – от коротких check-in до полных сессий',
+      'clients-li3': 'Упражнения, метафорические карты, отслеживание эмоций',
+      'clients-li4': 'Еженедельные отчёты с паттернами и динамикой',
+      'clients-li5': 'Поделиться дневником и отчётами с реальным терапевтом',
+      'connector-badge': 'данные шерятся',
+      'therapists-label': 'PsychoAI для терапевтов',
+      'therapists-li1': 'Транскрипция сессий – автоматически определяет гештальт-механизмы',
+      'therapists-li2': 'Карточка клиента с анализом долгосрочных трендов',
+      'therapists-li3': 'Брифинг перед сессией – что происходило с прошлой встречи',
+      'therapists-li4': 'Алерты по паттернам – показывает то, что сложно заметить вручную',
+      'therapists-li5': 'Видит дневник клиента (если расшарен) – полный контекст перед сессией',
+      'more-summary': 'Подробнее о системе',
+      'more1-title': 'Клиентское приложение – полный функционал',
+      'more1-li1': 'AI-сессии – выбор персоны: Перлз, Роджерс, Ялом или реальные практики',
+      'more1-li2': 'Метафорические карты – AI-guided рефлексия вокруг сгенерированного образа',
+      'more1-li3': 'Ежемесячные отчёты с динамикой, темами, эмоциональным таймлайном',
+      'more1-li4': 'Маркетплейс терапевтов – AI подбирает специалиста по стилю и совместимости',
+      'more2-title': 'Приложение для терапевтов – полный функционал',
+      'more2-li1': 'Рекомендации интервенций – что работало в похожих случаях среди тысяч сессий',
+      'more2-li2': 'Динамика клиента – сдвиги тем, эмоциональные паттерны, маркеры прогресса',
+      'more2-li3': 'Заметки голосом или текстом – авто-структурируются в эпикриз клиента',
+      'more2-li4': 'Коллективный интеллект – начинающий терапевт получает опыт всего поля',
+      'more3-title': 'Приватность',
+      'more3-li1': 'Клиент контролирует что и с кем шерится',
+      'more3-li2': 'Анонимизация перед отправкой в облачные LLM',
+      'more3-li3': 'Роадмап на полностью локальные модели – нулевая утечка данных',
+      'projects-tag': 'Избранные работы',
+      'projects-title': 'AI-системы: построены и запущены',
+      'proj1-desc': 'Продакшн RAG-ассистент для гештальт-терапии. Faithfulness=1.0 по RAGAS. Python, Qdrant, Redis, Gemini Flash.',
+      'proj2-desc': 'Универсальная RAG-платформа – загрузи документы, получи готового AI-ассистента. Python, FastAPI, Qdrant, Docker.',
+      'proj3-desc': 'Telegram-бот с жизненным циклом сессий – текст, голос (Whisper STT) и фото (Gemini Vision) в одном диалоге.',
+      'proj4-desc': 'Универсальный AI-ассистент – текст, голос (Whisper + TTS), vision, генерация изображений (DALL-E 3), RAG по своим документам.',
+      'cta-tag': 'Контакт',
+      'cta-title': 'Давай построим что-то настоящее',
+      'cta-sub': 'Есть идея AI-проекта – или пока не уверен что возможно – напиши. Вернусь с чёткой картиной того, что можно построить и как.',
+      'btn-tg': 'Написать в Telegram',
+      'btn-li': 'Написать в LinkedIn',
+      'footer-text': 'Александр Кирилов · AI Engineer · aipush.dev',
+    }
+  };
+
+  function applyLang(lang) {
+    const t = T[lang];
+    Object.keys(t).forEach(key => {
+      const el = document.querySelector(`[data-i18n="${key}"]`);
+      if (el) el.innerHTML = t[key];
+    });
+    document.getElementById('opt-en').classList.toggle('active', lang === 'en');
+    document.getElementById('opt-ru').classList.toggle('active', lang === 'ru');
+    document.documentElement.lang = lang;
+    currentLang = lang;
+    pi = 0; ci = 0; deleting = false;
+  }
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    applyLang(currentLang === 'en' ? 'ru' : 'en');
+  });
+
+  /* ── TYPING EFFECT ── */
   let pi = 0, ci = 0, deleting = false;
-  const el = document.getElementById('tagline');
+  const taglineEl = document.getElementById('tagline');
+
+  function currentPhrases() {
+    return currentLang === 'ru' ? phrasesRu : phrasesEn;
+  }
 
   function type() {
-    const phrase = phrases[pi];
+    const phrases = currentPhrases();
+    const phrase = phrases[pi % phrases.length];
     if (!deleting) {
-      el.innerHTML = phrase.slice(0, ci++) + '<span class="cursor"></span>';
+      taglineEl.innerHTML = phrase.slice(0, ci++) + '<span class="cursor"></span>';
       if (ci > phrase.length) { deleting = true; setTimeout(type, 1800); return; }
     } else {
-      el.innerHTML = phrase.slice(0, ci--) + '<span class="cursor"></span>';
+      taglineEl.innerHTML = phrase.slice(0, ci--) + '<span class="cursor"></span>';
       if (ci < 0) { deleting = false; pi = (pi + 1) % phrases.length; ci = 0; }
     }
     setTimeout(type, deleting ? 28 : 52);
