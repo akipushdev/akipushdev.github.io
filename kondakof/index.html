@@ -629,6 +629,14 @@
         .map(cb => cb.value)
         .join(', ') || 'Не выбраны';
 
+      // Capture UTM & Referrer analytics
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmSource = urlParams.get('utm_source');
+      const utmCampaign = urlParams.get('utm_campaign');
+      const utmContent = urlParams.get('utm_content');
+      const utmMedium = urlParams.get('utm_medium');
+      const utmTerm = urlParams.get('utm_term');
+
       // Build structured message for Telegram
       let text = `🔥 *НОВАЯ ЗАЯВКА С САЙТА KONDAKOF*\n\n`;
       text += `📍 *Тип запроса:* ${source}\n`;
@@ -640,6 +648,19 @@
       if (comment) {
         text += `💬 *Пожелания:* ${comment}\n`;
       }
+
+      // Add Marketing Analytics if UTM present
+      if (utmSource || utmCampaign) {
+        text += `\n🎯 *МАРКЕТИНГ (UTM):*\n`;
+        if (utmSource) text += `• Источник: \`${utmSource}\`\n`;
+        if (utmCampaign) text += `• Кампания: \`${utmCampaign}\`\n`;
+        if (utmMedium) text += `• Тип трафика: \`${utmMedium}\`\n`;
+        if (utmContent) text += `• Объявление: \`${utmContent}\`\n`;
+        if (utmTerm) text += `• Ключ: \`${utmTerm}\`\n`;
+      } else if (document.referrer) {
+        text += `\n🔗 *Переход с:* ${document.referrer.substring(0, 100)}\n`;
+      }
+
       text += `\n⏱ _Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Minsk' })}_`;
 
       // Disable button & show spinner
