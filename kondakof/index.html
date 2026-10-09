@@ -53,6 +53,12 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
+    /* Modal backdrop */
+    .glass-modal {
+      background: rgba(11, 13, 17, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
     /* Section image styling */
     .visual-slice {
       display: block;
@@ -60,6 +66,19 @@
       height: auto;
       border-radius: 0;
       filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+    }
+    /* Custom form styling */
+    .custom-radio:checked + label {
+      border-color: #E5A93C;
+      background-color: rgba(229, 169, 60, 0.12);
+      color: #FFF;
+      box-shadow: 0 0 15px rgba(229, 169, 60, 0.25);
+    }
+    .custom-checkbox:checked + label {
+      border-color: #E5A93C;
+      background-color: rgba(229, 169, 60, 0.12);
+      color: #FFF;
+      box-shadow: 0 0 15px rgba(229, 169, 60, 0.25);
     }
   </style>
 </head>
@@ -94,13 +113,13 @@
           <span>PDF (3.4 MB)</span>
         </a>
 
-        <!-- Primary CTA: Telegram -->
-        <a href="https://t.me/DmKondakof?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%B8%D0%B9!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D1%8D%D1%81%D0%BA%D0%B8%D0%B7%20%D0%BF%D0%BE%D0%B4%D1%81%D0%B2%D0%B5%D1%82%D0%BA%D0%B8%20%D0%B4%D0%BE%D0%BC%D0%B0." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold rounded-lg bg-brand-gold hover:bg-brand-goldHover text-black transition-all shadow-neon hover:shadow-neon-lg transform hover:-translate-y-0.5">
+        <!-- Primary CTA: Trigger Brief Modal -->
+        <button onclick="openBriefModal('Получить эскиз')" class="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-bold rounded-lg bg-brand-gold hover:bg-brand-goldHover text-black transition-all shadow-neon hover:shadow-neon-lg transform hover:-translate-y-0.5 cursor-pointer">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .46z"/>
           </svg>
           <span>Получить эскиз</span>
-        </a>
+        </button>
 
         <!-- Mobile Menu Toggle Button -->
         <button id="mobileMenuBtn" aria-label="Открыть меню" class="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none">
@@ -137,11 +156,11 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
       </svg>
     </a>
-    <a href="https://t.me/DmKondakof" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-brand-gold text-black shadow-neon flex items-center justify-center hover:scale-105 transition-transform" aria-label="Написать в Telegram">
+    <button onclick="openBriefModal('Кнопка связи')" class="w-12 h-12 rounded-full bg-brand-gold text-black shadow-neon flex items-center justify-center hover:scale-105 transition-transform" aria-label="Открыть бриф">
       <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .46z"/>
       </svg>
-    </a>
+    </button>
   </div>
 
   <!-- Main Container -->
@@ -156,9 +175,10 @@
             <h1 class="text-lg sm:text-xl font-bold text-white tracking-wide">Контурное освещение частных домов</h1>
             <p class="text-sm text-gray-400 mt-1">Подчеркивает геометрию кровли, террасы и фактуру премиальных фасадов</p>
           </div>
-          <a href="#offer" class="w-full sm:w-auto text-center px-6 py-3 rounded-lg bg-brand-gold hover:bg-brand-goldHover text-black font-bold text-sm shadow-neon transition-all">
+          <!-- Target Button 1 -->
+          <button onclick="openBriefModal('Рассчитать для дома (Hero)')" class="w-full sm:w-auto text-center px-6 py-3 rounded-lg bg-brand-gold hover:bg-brand-goldHover text-black font-bold text-sm shadow-neon transition-all cursor-pointer transform hover:-translate-y-0.5">
             Рассчитать для дома
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -166,7 +186,6 @@
     <!-- SECTION 2: COMFORT & PHILOSOPHY -->
     <section id="comfort" class="relative max-w-4xl mx-auto px-2 sm:px-4 pt-10 sm:pt-14 scroll-mt-24">
       <div class="relative overflow-hidden rounded-2xl shadow-2xl border border-white/10 bg-[#141820]">
-        <!-- Badge -->
         <div class="bg-black/60 border-b border-white/10 px-6 py-3 flex items-center justify-between">
           <span class="text-xs uppercase tracking-widest text-brand-gold font-bold">Архитектурный подход</span>
           <span class="text-xs text-gray-400">Комфорт 24/7</span>
@@ -279,9 +298,10 @@
               <div class="text-xs text-gray-400 mt-1">Дмитрий Кондаков лично курирует техническую реализацию проектов</div>
             </div>
           </div>
-          <a href="#offer" class="shrink-0 px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs tracking-wider uppercase transition-all">
+          <!-- Target Button 2 -->
+          <button onclick="openBriefModal('Заказать аудит фасада')" class="shrink-0 px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-brand-gold/40 text-brand-gold hover:text-white font-semibold text-xs tracking-wider uppercase transition-all shadow-neon cursor-pointer transform hover:-translate-y-0.5">
             Заказать аудит фасада
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -306,13 +326,13 @@
 
           <!-- Direct Buttons Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
-            <!-- Telegram CTA -->
-            <a href="https://t.me/DmKondakof?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%B8%D0%B9!%20%D0%9E%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D1%8E%20%D1%84%D0%BE%D1%82%D0%BE%20%D1%84%D0%B0%D1%81%D0%B0%D0%B4%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%8D%D1%81%D0%BA%D0%B8%D0%B7%D0%B0%20%D0%BF%D0%BE%D0%B4%D1%81%D0%B2%D0%B5%D1%82%D0%BA%D0%B8." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 p-4 rounded-xl bg-brand-gold hover:bg-brand-goldHover text-black font-bold text-sm shadow-neon hover:shadow-neon-lg transition-all transform hover:-translate-y-0.5">
+            <!-- Telegram Modal trigger -->
+            <button onclick="openBriefModal('Оффер: Получить эскиз')" class="flex items-center justify-center gap-3 p-4 rounded-xl bg-brand-gold hover:bg-brand-goldHover text-black font-bold text-sm shadow-neon hover:shadow-neon-lg transition-all transform hover:-translate-y-0.5 cursor-pointer">
               <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .46z"/>
               </svg>
-              <span>Написать в Telegram</span>
-            </a>
+              <span>Заполнить бриф на эскиз</span>
+            </button>
 
             <!-- Call CTA -->
             <a href="tel:+375445660077" class="flex items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 text-white font-bold text-sm transition-all hover:border-brand-gold">
@@ -342,6 +362,168 @@
 
   </main>
 
+  <!-- Interactive Brief Modal Dialog -->
+  <div id="briefModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity" onclick="closeBriefModal()"></div>
+
+    <div class="flex min-h-full items-center justify-center p-3 sm:p-6 text-center">
+      <div class="relative transform overflow-hidden rounded-2xl bg-[#12161F] border border-brand-gold/30 p-6 sm:p-8 text-left shadow-2xl transition-all w-full max-w-xl text-gray-200">
+        
+        <!-- Close Button -->
+        <button onclick="closeBriefModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors" aria-label="Закрыть">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <!-- Modal Header -->
+        <div class="mb-6">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-[11px] font-bold tracking-wider uppercase mb-2">
+            Архитектурный опросник
+          </div>
+          <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-white">Расчёт контурной подсветки дома</h3>
+          <p class="text-xs sm:text-sm text-gray-400 mt-1" id="modalSubtitle">
+            Ответьте на несколько вопросов — это поможет подготовить точный эскиз за 24 часа.
+          </p>
+        </div>
+
+        <!-- Brief Form -->
+        <form id="briefForm" onsubmit="handleBriefSubmit(event)" class="space-y-5">
+          <input type="hidden" id="formSource" name="source" value="Кнопка на сайте">
+
+          <!-- Question 1: Facade Material -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+              1. Материал отделки фасада
+            </label>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <input type="radio" id="facade1" name="facade" value="Клинкер / кирпич / камень" class="hidden custom-radio" checked>
+                <label for="facade1" class="block p-3 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  Кирпич / камень
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="facade2" name="facade" value="Штукатурка / короед" class="hidden custom-radio">
+                <label for="facade2" class="block p-3 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  Штукатурка
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="facade3" name="facade" value="Дерево / брус / планкен" class="hidden custom-radio">
+                <label for="facade3" class="block p-3 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  Дерево / планкен
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="facade4" name="facade" value="Композит / вентфасад" class="hidden custom-radio">
+                <label for="facade4" class="block p-3 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  Композит / металл
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 2: Lighting Zones -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+              2. Зоны для подсветки (выберите всё нужное)
+            </label>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <input type="checkbox" id="zoneRoof" name="zone" value="Контур кровли" class="hidden custom-checkbox" checked>
+                <label for="zoneRoof" class="block p-2.5 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  ✓ Контур кровли
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="zoneEntrance" name="zone" value="Входная группа" class="hidden custom-checkbox" checked>
+                <label for="zoneEntrance" class="block p-2.5 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  ✓ Входная группа
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="zoneTerrace" name="zone" value="Терраса / патио" class="hidden custom-checkbox">
+                <label for="zoneTerrace" class="block p-2.5 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  ✓ Терраса / патио
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="zoneFence" name="zone" value="Забор / ландшафт" class="hidden custom-checkbox">
+                <label for="zoneFence" class="block p-2.5 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  ✓ Забор / линия
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 3: Construction Stage -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+              3. Стадия готовности дома
+            </label>
+            <div class="grid grid-cols-3 gap-2 text-xs">
+              <div>
+                <input type="radio" id="stage1" name="stage" value="Дом жилой (чистовая отделка)" class="hidden custom-radio" checked>
+                <label for="stage1" class="block p-2.5 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  Жилой дом
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="stage2" name="stage" value="Идёт отделка фасада" class="hidden custom-radio">
+                <label for="stage2" class="block p-2.5 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  Идёт отделка
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="stage3" name="stage" value="Проектирование / коробка" class="hidden custom-radio">
+                <label for="stage3" class="block p-2.5 rounded-lg bg-black/40 border border-white/10 hover:border-brand-gold/50 cursor-pointer text-center text-gray-300 transition-all">
+                  Проект
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Client Contacts -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <div>
+              <label for="clientName" class="block text-xs font-medium text-gray-300 mb-1">Ваше имя *</label>
+              <input type="text" id="clientName" required placeholder="Александр" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/15 focus:border-brand-gold focus:outline-none text-white text-sm">
+            </div>
+            <div>
+              <label for="clientContact" class="block text-xs font-medium text-gray-300 mb-1">Телефон или Telegram *</label>
+              <input type="text" id="clientContact" required placeholder="+375 29 ... или @username" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/15 focus:border-brand-gold focus:outline-none text-white text-sm">
+            </div>
+          </div>
+
+          <!-- Comment / Wishes -->
+          <div>
+            <label for="clientComment" class="block text-xs font-medium text-gray-300 mb-1">Пожелания или ссылка на фото дома (опционально)</label>
+            <textarea id="clientComment" rows="2" placeholder="Ориентировочная длина кровли, теплый/нейтральный свет или вопрос..." class="w-full px-3.5 py-2 rounded-lg bg-black/50 border border-white/15 focus:border-brand-gold focus:outline-none text-white text-xs"></textarea>
+          </div>
+
+          <!-- Submit Buttons -->
+          <div class="pt-2 flex flex-col sm:flex-row gap-3">
+            <button type="submit" class="flex-1 py-3 px-4 rounded-xl bg-brand-gold hover:bg-brand-goldHover text-black font-bold text-sm shadow-neon transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .46z"/>
+              </svg>
+              <span>Отправить в Telegram Дмитрию</span>
+            </button>
+            <button type="button" onclick="closeBriefModal()" class="sm:w-auto py-3 px-5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 text-xs font-semibold transition-colors">
+              Отмена
+            </button>
+          </div>
+          <p class="text-[11px] text-gray-500 text-center">
+            Нажимая кнопку, откроется диалог в Telegram с готовым текстом брифа, куда вы сможете сразу прикрепить фото дома.
+          </p>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="mt-16 py-8 border-t border-white/10 text-center text-xs text-gray-500">
     <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -353,8 +535,9 @@
     </div>
   </footer>
 
-  <!-- Script for Mobile Menu & Smooth Anchor Handling -->
+  <!-- Script for Mobile Menu, Modal & Form Handling -->
   <script>
+    // Mobile navigation
     const menuBtn = document.getElementById('mobileMenuBtn');
     const menu = document.getElementById('mobileMenu');
     menuBtn.addEventListener('click', () => {
@@ -365,6 +548,70 @@
         menu.classList.add('hidden');
       });
     });
+
+    // Modal Control
+    const briefModal = document.getElementById('briefModal');
+    const formSource = document.getElementById('formSource');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+
+    function openBriefModal(source = 'Общий запрос') {
+      formSource.value = source;
+      if (source.includes('аудит')) {
+        modalSubtitle.textContent = 'Оставьте контакты и параметры фасада — согласуем удобное время для технического аудита.';
+      } else {
+        modalSubtitle.textContent = 'Ответьте на несколько вопросов — это поможет подготовить предварительный эскиз за 24 часа.';
+      }
+      briefModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBriefModal() {
+      briefModal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Escape key closes modal
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !briefModal.classList.contains('hidden')) {
+        closeBriefModal();
+      }
+    });
+
+    // Handle Form Submit
+    function handleBriefSubmit(e) {
+      e.preventDefault();
+      
+      const source = formSource.value;
+      const name = document.getElementById('clientName').value.trim();
+      const contact = document.getElementById('clientContact').value.trim();
+      const comment = document.getElementById('clientComment').value.trim();
+      
+      const selectedFacade = document.querySelector('input[name="facade"]:checked')?.value || 'Не указан';
+      const selectedStage = document.querySelector('input[name="stage"]:checked')?.value || 'Не указана';
+      
+      const selectedZones = Array.from(document.querySelectorAll('input[name="zone"]:checked'))
+        .map(cb => cb.value)
+        .join(', ') || 'Не выбраны';
+
+      // Build structured message for Telegram
+      let text = `Здравствуйте, Дмитрий!\n`;
+      text += `Заявка с сайта (${source}):\n\n`;
+      text += `👤 Имя: ${name}\n`;
+      text += `📞 Контакт: ${contact}\n`;
+      text += `🏠 Фасад: ${selectedFacade}\n`;
+      text += `💡 Зоны подсветки: ${selectedZones}\n`;
+      text += `📍 Стадия дома: ${selectedStage}\n`;
+      if (comment) {
+        text += `💬 Пожелания: ${comment}\n`;
+      }
+      text += `\nГотов(а) отправить фото дома для эскиза.`;
+
+      const tgUrl = `https://t.me/DmKondakof?text=${encodeURIComponent(text)}`;
+      
+      // Close modal and redirect to Telegram
+      closeBriefModal();
+      window.open(tgUrl, '_blank');
+    }
   </script>
 </body>
 </html>
