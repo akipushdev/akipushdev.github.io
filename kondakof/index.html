@@ -10,6 +10,20 @@
   <meta property="og:image" content="images/01_hero.jpg">
   <meta property="og:type" content="website">
 
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113591050', 'ym');
+
+      ym(113591050, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/113591050" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -588,6 +602,11 @@
       }
       briefModal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
+
+      // Send Metrika Goal: open_modal
+      if (typeof ym === 'function') {
+        ym(113591050, 'reachGoal', 'open_modal', { source: source });
+      }
     }
 
     // Reset and close
@@ -685,6 +704,15 @@
 
         const data = await response.json();
         if (data.ok) {
+          // Send Metrika Goal: lead_success
+          if (typeof ym === 'function') {
+            ym(113591050, 'reachGoal', 'lead_success', {
+              source: source,
+              facade: selectedFacade,
+              stage: selectedStage
+            });
+          }
+
           // Show success screen in modal
           document.getElementById('briefForm').classList.add('hidden');
           document.getElementById('modal-title').classList.add('hidden');
