@@ -114,15 +114,56 @@ GitHub Pages предоставляет бесплатный хостинг с �
 
 ---
 
-## 5. Яндекс Метрика и цели конверсии
+## 5. Как подключить свою Яндекс.Метрику или Google Analytics 4
 
-На сайте уже установлен счетчик **Яндекс Метрики**: `113591050`.
+В коде уже прошита связка с аналитикой. Чтобы статистика шла в **ваш собственный рекламный кабинет**, выполните следующие шаги:
 
-В коде реализована отправка двух JavaScript-целей:
-1. **`open_modal`** — фиксирует интерес (пользователь нажал любую из кнопок: «Рассчитать для дома», «Заказать аудит», «Получить эскиз»).
-2. **`lead_success`** — главная конверсия (заявка успешно ушла в Telegram). По этой цели настраивается авто-стратегия с оплатой за лиды в Яндекс Директ.
+### Вариант А: Подключение вашей Яндекс.Метрики
+1. Зайдите в [metrika.yandex.ru](https://metrika.yandex.ru) и нажмите **«Добавить счётчик»**.
+2. В поле *Адрес сайта* укажите: `kondakof.com/home-lighting` (или `kondakof.com`). Включите *Вебвизор, карту скроллинга, аналитику форм*.
+3. Получите ваш **номер счётчика** (например: `98765432`).
+4. В файле `index.html`:
+   - В теге `<head>` на строках `~14-25` замените старый номер `113591050` на ваш новый номер счётчика.
+   - В скрипте на строках `~610` и `~710` найдите вызовы:
+     ```javascript
+     ym(113591050, 'reachGoal', 'open_modal', ...);
+     ym(113591050, 'reachGoal', 'lead_success', ...);
+     ```
+     Замените `113591050` на ваш номер.
+5. **Настройка целей в панели Метрики:**
+   В настройках счетчика в Метрике перейдите во вкладку **«Цели»** → **Добавить цель** (тип: *JavaScript-событие*):
+   - Цель 1: Идентификатор `open_modal` (название: «Открытие брифа»)
+   - Цель 2: Идентификатор `lead_success` (название: «Отправка заявки») — *главная цель для оптимизации Яндекс Директа!*
 
-Если создадите свой собственный счетчик в [metrika.yandex.ru](https://metrika.yandex.ru), просто замените число `113591050` на ваш номер в `index.html` (в шапке `<head>` и в функциях `openBriefModal` и `handleBriefSubmit`).
+---
+
+### Вариант Б: Подключение Google Analytics 4 (GA4)
+Если планируете запускать Google Ads или анализировать через GA:
+1. Зайдите в [analytics.google.com](https://analytics.google.com), создайте поток данных и скопируйте ваш **Measurement ID** (вида `G-XXXXXXXXXX`).
+2. В файле `index.html` прямо перед закрывающим тегом `</head>` вставьте стандартный код GA4:
+   ```html
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-XXXXXXXXXX');
+   </script>
+   ```
+3. Для отправки событий в Google Analytics добавьте в код функций отправки:
+   - В `openBriefModal`:
+     ```javascript
+     if (typeof gtag === 'function') {
+       gtag('event', 'open_brief_modal', { 'event_category': 'engagement' });
+     }
+     ```
+   - В `handleBriefSubmit` (при успешной отправке):
+     ```javascript
+     if (typeof gtag === 'function') {
+       gtag('event', 'generate_lead', { 'event_category': 'conversion' });
+     }
+     ```
 
 ---
 
